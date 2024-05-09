@@ -1,0 +1,63 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+      <app-content-header [contentHeader]="contentHeader"></app-content-header>
+  
+      <div class="row mb-1">
+        <div class="col-12">
+            <div class="input-group input-group-merge">
+                <input class="form-control" (ngModelChange)="filter($event)" ngModel placeholder="Recherche"/>
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <i class="feather icon-search"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 col-12" *ngFor="let invitation of filteredInvitations">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row m-0">
+                        <div class="avatar avatar-lg mr-1" [class]="'bg-light-' + invitation.color">
+                            <span class="avatar-content">{{invitation.shortName}}</span>
+                          </div>
+    
+                        <div class="d-flex flex-column flex-grow-1">
+                            <h4 class="m-0">{{(invitation.lastname || '------') + ' ' + (invitation.firstname || '--------')}}</h4>
+                            <span class="text-muted">{{invitation.email || '-----------@------.---'}}</span>
+                            <span class="text-secondary font-small-3 font-weight-bold">Invité le {{invitation.creation_date | date: 'dd/MM/yyyy à HH:mm' || '--/--/---- --:--'}}</span>
+                        </div>
+    
+                        <div class="d-flex flex-column justify-content-between">
+                            <button class="btn btn-primary btn-sm" (click)="resendInvitation(invitation)">
+                                Relancer
+                            </button>
+                            <button (click)="deleteInvitation(invitation._id)" class="btn btn-outline-danger btn-sm">
+                                Supprimer
+                            </button>
+                        </div>
+                        
+                    </div>
+                </div>
+              </div>
+          </div>
+      </div>
+
+      <ngb-alert type="secondary" *ngIf="invitations.length == 0 && !loadingInvitations" [dismissible]="false" class="m-1">
+        <div class="alert-body"><strong>Pas d'invitation en cours! </strong> Il n'y a aucune invitation en cours pour le moment.</div>
+     </ngb-alert>
+     <ngb-alert type="primary" *ngIf="loadingInvitations" [dismissible]="false" class="m-1">
+        <div class="alert-body">
+          <div class="spinner-border text-primary mr-1 font-small-3" role="status">
+          <span class="sr-only"></span>
+        </div>
+        <strong>Chargement en cours. </strong> Nous sommes en train d'apporter vos données...
+        </div>
+      </ngb-alert>
+      
+
+    </div>
+  </div>
+  

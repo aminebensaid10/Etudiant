@@ -1,0 +1,124 @@
+<div class="auth-wrapper auth-v1 px-3" *ngIf="!invalidLink && !gettingPreInscription">
+    <div class="auth-inner py-3">  
+    <div class="card">
+
+        <div class="card-body">
+            <h4 class="card-title mb-1">Inscription ✍</h4>
+            <p class="card-text mb-2">Veuillez finaliser votre pre-inscription à fin de pouvoir accèder à votre compte</p>
+
+            <form class="form" #f="ngForm">
+              <div class="d-flex flex-column align-items-center">
+                    <img class="img-fluid" id="profile-image" [src]="imageSrc ?? 'assets/images/avatars/user.png'" alt="Profile Picture" />
+
+                    <div class="row justify-content-center mt-2">
+                      <button class="btn btn-outline-primary btn-sm mr-1" (click)="resetImage()">Annuler</button>
+                      <button class="btn btn-primary btn-sm" for="profile-img-upload" (click)="file.click()" >Selectionner</button>
+                      <input type="file" #file id="profile-img-upload"
+                      (change)="onFileSelected($event)"
+                      hidden accept="image/*"/>
+                    </div>
+              </div>
+                
+                <div class="form-group">
+                  <label for="first-name-column">Nom</label>
+                  <input
+                    type="text"
+                    id="first-name-column"
+                    [ngClass]="{'is-invalid': submitted && userToAdd.lastname == null }"
+                    [(ngModel)]="userToAdd.lastname"
+                    class="form-control"
+                    required
+                    placeholder="Nom"
+                    name="fname-column"
+                  />
+                </div>
+
+              <div class="form-group">
+                  <label for="last-name-column">Prenom</label>
+                  <input
+                    type="text"
+                    id="last-name-column"
+                    [ngClass]="{'is-invalid': submitted && userToAdd.firstname == '' }"
+                    class="form-control"
+                    required
+                    [(ngModel)]="userToAdd.firstname"
+                    placeholder="Prenom"
+                    name="lname-column"
+                  />
+                </div>
+
+              <div class="form-group">
+                  <label for="country-floating">Email</label>
+                  <input
+                    type="text"
+                    [ngClass]="{'is-invalid': submitted && userToAdd.email == null }"
+                    disabled
+                    [(ngModel)]="userToAdd.email"
+                    id="country-floating"
+                    required
+                    class="form-control"
+                    name="country-floating"
+                    placeholder="Email"
+                  />
+                </div>
+
+                <div class="form-group">
+                    <label for="pwd">Mot de passe</label>
+                    <input type="password" id="pwd"
+                    class="form-control"
+                    required
+                    [ngClass]="{'is-invalid': submitted && invalidPwd }"
+                    [(ngModel)]="userToAdd.password"
+                    (keyup)="onPwdChange()"
+                    placeholder="Mot de passe"
+                    name="pwd" />
+                    <div *ngIf="invalidPwd && userToAdd.password.length > 0 && userToAdd.password.length < 6"z class="invalid-feedback">Mot de passe trés faible</div>
+                  </div>
+
+                <div class="form-group">
+                    <label for="confirm_pwd">Confimer mot de passe</label>
+                    <input type="password" id="confirm_pwd"
+                    required
+                    class="form-control"
+                    [ngClass]="{'is-invalid': submitted && invalidPwd}"
+                    [(ngModel)]="confirmPassword"
+                    (keyup)="onPwdChange()"
+                    placeholder="Confirmer mot de passe"
+                    name="confpwd" />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="city-column">Télephone</label>
+                    <input type="number" id="city-column"
+                    class="form-control"
+                    [(ngModel)]="userToAdd.phone_number"
+                    placeholder="Télephone"
+                    name="phonenbr" />
+                  </div>
+                
+                  <div class="form-group">
+                    <label class="form-label">Date de naissance</label>
+                    <ng2-flatpickr
+                      [config]="dateOptions"
+                      placeholder="Date de naissance"
+                      #datePicker
+                      name="actDate"
+                      required
+                      class="is-invalid"
+                    ></ng2-flatpickr>
+                  </div>
+
+        <ngb-alert [type]="'danger'" [dismissible]="false" *ngIf="f.invalid && submitted">
+            <div class="alert-body">
+                <p><b>Veuillez vérifier vos données!</b> il y a des champs invalides</p>
+            </div>
+        </ngb-alert>
+        <button class="btn btn-primary btn-block mt-3" (click)="signUp(f)" rippleEffect>S'inscrire</button>
+
+      </form>      
+
+        </div>
+
+    </div>
+    </div>
+</div>

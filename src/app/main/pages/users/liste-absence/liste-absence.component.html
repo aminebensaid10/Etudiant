@@ -1,0 +1,47 @@
+<div class="container">
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+    <div class="row mb-3">
+      <div class="col-12">
+        <div class="input-group input-group-merge">
+          <input class="form-control" [(ngModel)]="searchTerm" placeholder="Recherche" />
+          <div class="input-group-append">
+            <span class="input-group-text"><i class="feather icon-search"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="absences.length > 0">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID Élève</th>
+            <th scope="col">Date Début</th>
+            <th scope="col">Date Fin</th>
+            <th scope="col">Type</th>
+            <th scope="col">Nombre d'Absences</th>
+            <th scope="col">Justificatif</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let absence of applyFilter()">
+            <td>{{ absence.id_eleve }}</td>
+            <td>{{ absence.date_debut }}</td>
+            <td>{{ absence.date_fin }}</td>
+            <td>{{ absence.type }}</td>
+            <td>{{ absence.nbre_absence }}</td>
+            <td>{{ absence.justificatif }}</td>
+            <td>
+                <a [routerLink]="['../../users/edit-absence', absence.id_Absence]" class="btn btn-primary">Modifier</a>
+                <button class="btn btn-danger" (click)="deleteAbsence(absence.id_Absence)">Supprimer</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div *ngIf="absences.length === 0">
+      <p>Aucune absence trouvée.</p>
+    </div>
+  </div>
+  

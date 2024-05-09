@@ -1,0 +1,46 @@
+<div class="container">
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+  
+    <div class="row mb-3">
+      <div class="col-12">
+        <div class="input-group input-group-merge">
+          <input class="form-control" [(ngModel)]="searchTerm" placeholder="Recherche" />
+          <div class="input-group-append">
+            <span class="input-group-text"><i class="feather icon-search"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="classes.length > 0">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Niveau</th>
+            <th scope="col">Élève</th>
+            <th scope="col">Actions</th> <!-- Colonne pour les actions -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let classe of applyFilter()">
+            <td>{{ classe.nom }}</td>
+            <td>{{ classe.niveau }}</td>
+            <td>{{ classe.eleve }}</td>
+            <td>
+              <!-- Lien pour remplir la fiche de présence -->
+              <a [routerLink]="['../../users/ajouter-absence']" class="btn btn-success" (click)="fillPresence(classe.Id_classe)">Remplir la fiche de présence</a>
+              
+              <!-- Lien pour ajouter une sanction -->
+              <a [routerLink]="['../../users/ajouter-sanction']" class="btn btn-danger" (click)="addSanction(classe.Id_classe)">Ajouter une sanction</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div *ngIf="classes.length === 0">
+      <p>Aucune classe trouvée.</p>
+    </div>
+  </div>
+  

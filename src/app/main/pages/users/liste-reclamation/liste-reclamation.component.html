@@ -1,0 +1,42 @@
+<div class="container">
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+    <div class="row mb-3">
+      <div class="col-12">
+        <div class="input-group input-group-merge">
+          <input class="form-control" [(ngModel)]="searchTerm" placeholder="Recherche" />
+          <div class="input-group-append">
+            <span class="input-group-text"><i class="feather icon-search"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID Réclamation</th>
+          <th>Titre</th>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Heure</th>
+          <th>Actions</th> <!-- Colonne pour les actions -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reclamation of applyFilter()">
+          <td>{{ reclamation.id_Reclamation }}</td>
+          <td>{{ reclamation.titre }}</td>
+          <td>{{ reclamation.date }}</td>
+          <td>{{ reclamation.description }}</td>
+          <td>{{ reclamation.heure }}</td>
+          <td>
+            <!-- Bouton pour modifier la réclamation -->
+            <a [routerLink]="['../../users/edit-reclamation', reclamation.id_Reclamation]" class="btn btn-primary">Modifier</a>
+
+            <!-- Bouton pour supprimer la réclamation -->
+            <button class="btn btn-danger" (click)="deleteReclamation(reclamation.id_Reclamation)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

@@ -1,0 +1,47 @@
+<div class="container">
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+    <div class="row mb-3">
+      <div class="col-12">
+        <div class="input-group input-group-merge">
+          <input class="form-control" [(ngModel)]="searchTerm" placeholder="Recherche" />
+          <div class="input-group-append">
+            <span class="input-group-text"><i class="feather icon-search"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="sanctions.length > 0">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID Sanction</th>
+            <th scope="col">ID Élève</th>
+            <th scope="col">ID Enseignant</th>
+            <th scope="col">Type</th>
+            <th scope="col">Date</th>
+            <th scope="col">Motif</th>
+        
+            <th scope="col">Description</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sanction of applyFilter()">
+            <td>{{ sanction.id_sanction }}</td>
+            <td>{{ sanction.id_eleve }}</td>
+            <td>{{ sanction.id_enseignant }}</td>
+            <td>{{ sanction.type }}</td>
+            <td>{{ sanction.date }}</td>
+            <td>{{ sanction.motif }}</td>
+            <td>{{ sanction.description }}</td>
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div *ngIf="sanctions.length === 0">
+      <p>Aucune sanction trouvée.</p>
+    </div>
+  </div>
+  

@@ -1,0 +1,44 @@
+<div class="container">
+    <!-- En-tête de contenu -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+  
+    <!-- Barre de recherche -->
+    <div class="row mb-3">
+      <div class="col-12">
+        <div class="input-group input-group-merge">
+          <input class="form-control" [(ngModel)]="searchTerm" placeholder="Recherche" (input)="applyFilter()" />
+          <div class="input-group-append">
+            <span class="input-group-text"><i class="feather icon-search"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Tableau des documents -->
+    <div *ngIf="documents.length > 0">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Titre</th>
+            <th scope="col">Description</th>
+            <th scope="col">Date de réception</th>
+            <th scope="col">Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let document of applyFilter()">
+            <td>{{ document.titre }}</td>
+            <td>{{ document.description }}</td>
+            <td>{{ document.date_reception }}</td>
+            <td>{{ document.type }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Message si aucun document n'est trouvé -->
+    <div *ngIf="documents.length === 0">
+      <p>Aucun document trouvé.</p>
+    </div>
+  </div>
+  

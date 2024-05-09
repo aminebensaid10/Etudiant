@@ -1,0 +1,98 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+      <app-content-header [contentHeader]="contentHeader"></app-content-header>
+      
+    <div class="card">
+      <div class="card-header">
+          <div class="card-title">
+              <h4>Inviter un utilisateur</h4>
+          </div>
+      </div>
+      <form class="form" [formGroup]="inviteUserForm" (ngSubmit)="onSubmit()">
+        <div class="card-body">
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="first-name-column">Nom</label>
+                  <input
+                    type="text"
+                    id="first-name-column"
+                    [ngClass]="{'is-invalid': submitted && f.lastname.errors }"
+                    formControlName="lastname"
+                    class="form-control"
+                    placeholder="Nom"
+                    name="fname-column"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="last-name-column">Prenom</label>
+                  <input
+                    type="text"
+                    id="last-name-column"
+                    [ngClass]="{'is-invalid': submitted && f.firstname.errors }"
+                    formControlName="firstname"
+                    class="form-control"
+                    placeholder="Prenom"
+                    name="lname-column"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="country-floating">Email</label>
+                  <input
+                    type="text"
+                    [ngClass]="{'is-invalid': submitted && f.email.errors }"
+                    id="country-floating"
+                    (ngModelChange)="emailExist = false"
+                    formControlName="email"
+                    class="form-control"
+                    name="country-floating"
+                    placeholder="Email"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="city-column">Télephone</label>
+                  <input type="number" id="city-column"
+                  class="form-control"
+                  placeholder="Télephone"
+                  formControlName="phone_number"
+                  name="phonenbr" />
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex justify-content-end m-0">
+              <div class="custom-control custom-control-primary custom-switch" style="margin-top: 30px;">
+                <input type="checkbox" formControlName="isAdmin" name="isAdminSwitch" class="custom-control-input" id="customSwitch3" />
+                <label class="custom-control-label font-medium-1" for="customSwitch3">Administrateur</label>
+              </div>
+            </div>
+        </div>
+      </form>      
+
+              <ngb-alert [type]="'danger'" class="mx-2 mb-1" [dismissible]="false" *ngIf="inviteUserForm.invalid && submitted">
+                <div class="alert-body">
+                  <p><b>Veuillez vérifier vos données!</b> il y a des champs invalides.</p>
+                </div>
+              </ngb-alert>
+              <ngb-alert [type]="'danger'" class="mx-2 mb-2" [dismissible]="false" *ngIf="emailExist">
+                <div class="alert-body">
+                  <p><b>Email déja utilisé!</b> il y a un compte avec cette adresse mail.</p>
+                </div>
+              </ngb-alert>
+              <div class="row d-flex m-2 justify-content-end">
+                <button class="btn btn-outline-secondary" (click)="resetForm()">Réinitialiser</button>
+                <button (click)="onSubmit()" class="btn btn-primary ml-1" [disabled]="loading">
+                  <div *ngIf="loading" class="spinner-border text-secondary mr-25" role="status">
+                    <span class="sr-only"></span>
+                  </div>
+                  Inviter
+                </button>
+              </div>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="container">
+    <h2>Ajouter une Absence</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="idEleve">ID de l'Élève :</label>
+        <input type="number" class="form-control" id="idEleve" [(ngModel)]="absence.id_eleve" name="idEleve" required>
+      </div>
+      <div class="form-group">
+        <label for="nomEleve">Nom de l'Élève :</label>
+        <input type="text" class="form-control" id="nomEleve" [(ngModel)]="absence.nomEleve" name="nomEleve" required>
+      </div>
+      <div class="form-group">
+        <label for="prenomEleve">Prénom de l'Élève :</label>
+        <input type="text" class="form-control" id="prenomEleve" [(ngModel)]="absence.prenomEleve" name="prenomEleve" required>
+      </div>
+      <div class="form-group">
+        <label for="dateDebut">Date de Début :</label>
+        <input type="date" class="form-control" id="dateDebut" [(ngModel)]="absence.date_debut" name="dateDebut" required>
+      </div>
+      <div class="form-group">
+        <label for="dateFin">Date de Fin :</label>
+        <input type="date" class="form-control" id="dateFin" [(ngModel)]="absence.date_fin" name="dateFin" required>
+      </div>
+      <div class="form-group">
+        <label for="type">Type :</label>
+        <input type="text" class="form-control" id="type" [(ngModel)]="absence.type" name="type" required>
+      </div>
+      <div class="form-group">
+        <label for="nbreAbsence">Nombre d'Absences :</label>
+        <input type="number" class="form-control" id="nbreAbsence" [(ngModel)]="absence.nbre_absence" name="nbreAbsence" required>
+      </div>
+      <div class="form-group">
+        <label for="justificatif">Justificatif :</label>
+        <input type="text" class="form-control" id="justificatif" [(ngModel)]="absence.justificatif" name="justificatif">
+      </div>
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+    </form>
+  </div>
+  

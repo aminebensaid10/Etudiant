@@ -1,0 +1,43 @@
+<div class="container">
+    <h2>Ajouter une Sanction</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="idEleve">ID de l'Élève :</label>
+        <input type="number" class="form-control" id="idEleve" [(ngModel)]="sanction.id_eleve" name="idEleve" required>
+      </div>
+      <div class="form-group">
+        <label for="idEnseignant">ID de l'Enseignant :</label>
+        <input type="number" class="form-control" id="idEnseignant" [(ngModel)]="sanction.id_enseignant" name="idEnseignant" required>
+      </div>
+      <div class="form-group">
+        <label for="type">Type :</label>
+        <select class="form-control" id="type" [(ngModel)]="sanction.type" name="type" required>
+          <option value="">Sélectionner un type...</option>
+          <option value="Avertissement">Avertissement</option>
+          <option value="Blâme">Blâme</option>
+          <option value="Exclusion temporaire">Exclusion temporaire</option>
+          <!-- Ajoutez d'autres options selon vos besoins -->
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="date">Date :</label>
+        <input type="date" class="form-control" id="date" [(ngModel)]="sanction.date" name="date" required>
+      </div>
+      <div class="form-group">
+        <label for="motif">Motif :</label>
+        <select class="form-control" id="motif" [(ngModel)]="sanction.motif" name="motif" required>
+          <option value="">Sélectionner un motif...</option>
+          <option value="Retard">Retard</option>
+          <option value="Comportement inapproprié">Comportement inapproprié</option>
+          <option value="Non-respect des règles">Non-respect des règles</option>
+          <!-- Ajoutez d'autres options selon vos besoins -->
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="description">Description :</label>
+        <textarea class="form-control" id="description" [(ngModel)]="sanction.description" name="description" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+    </form>
+  </div>
+  
